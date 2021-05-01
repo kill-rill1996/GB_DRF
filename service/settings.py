@@ -33,6 +33,7 @@ INSTALLED_APPS = [
 
     'library',
     'users',
+    'to_do',
 
 ]
 
