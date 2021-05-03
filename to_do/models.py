@@ -25,6 +25,7 @@ class ToDo(models.Model):
     time_created = models.DateTimeField(auto_now_add=True)
     time_changed = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return f'Project {self.project}, user: {self.user}'

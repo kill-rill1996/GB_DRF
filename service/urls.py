@@ -7,6 +7,7 @@ from library.views import AuthorModelViewSets
 from users.views import UserModelViewSet
 from to_do.views import ProjectModelViewSet, TodoModelViewSet
 
+
 router = DefaultRouter()
 router.register('authors', AuthorModelViewSets)
 router.register('users', UserModelViewSet)
