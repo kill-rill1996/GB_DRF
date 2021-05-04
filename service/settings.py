@@ -1,5 +1,3 @@
-
-
 from pathlib import Path
 
 import sentry_sdk
@@ -22,6 +20,30 @@ sentry_sdk.init(
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    # 'formatters': {
+    #     'basic': {
+    #         'format': '\n%(asktime)s - %(levelname) - %(modules)s - %(message)s'
+    #     }
+    # },
+    'handlers': {
+        'basic': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': 'logfile.log',
+            # 'formatter': 'basic'
+        }
+    },
+    'loggers': {
+        'service_log': {
+            'handlers': ['basic'],
+            'level': 'INFO',
+            # 'propagate': True,
+        }
+    }
+}
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -150,9 +172,12 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
     ],
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny'
-    ]
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 100,
 }
 
 AUTH_USER_MODEL = 'users.User'
