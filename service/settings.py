@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 import sentry_sdk
@@ -76,6 +77,8 @@ INSTALLED_APPS = [
     'users',
     'to_do',
 
+    #app for add data in DB
+    'data',
 ]
 
 MIDDLEWARE = [
@@ -94,7 +97,7 @@ ROOT_URLCONF = 'service.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
