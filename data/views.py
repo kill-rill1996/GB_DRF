@@ -4,14 +4,10 @@ from django.shortcuts import redirect
 from mixer.backend.django import mixer
 from library.models import Book, Author
 
-from .services.add_items import add_authors, add_books
+from .services.add_items import add_items
 
 
-def add_author_view(request):
-    add_authors(int(request.headers['Number']))
-    return redirect('/api/authors/')
+def add_items_view(request):
+    model_url = add_items(request)
+    return redirect(f'/api/{model_url}')
 
-
-def add_book_view(request):
-    add_books(int(request.headers['Number']))
-    return redirect('/api/books/')
