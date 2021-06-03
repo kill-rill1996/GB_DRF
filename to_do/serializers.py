@@ -10,19 +10,18 @@ class UserProjectSerializer(HyperlinkedModelSerializer):
         fields = ['username']
 
 
-class ToDoModelSerializer(HyperlinkedModelSerializer):
-    user = UserProjectSerializer()
-    project = StringRelatedField()
-
-    class Meta:
-        model = ToDo
-        fields = ['user', 'project', 'text', 'time_created', 'time_changed', 'is_active']
-
-
 class ProjectsModelSerializer(HyperlinkedModelSerializer):
     users = UserProjectSerializer(many=True)
-    to_do = StringRelatedField(many=True)
 
     class Meta:
         model = Project
-        fields = ['title', 'users', 'git_repository', 'to_do']
+        fields = ['uuid', 'title', 'users', 'git_repository']
+
+
+class ToDoModelSerializer(HyperlinkedModelSerializer):
+    user = UserProjectSerializer()
+    project = ProjectsModelSerializer()
+
+    class Meta:
+        model = ToDo
+        fields = ['uuid', 'user', 'project', 'text', 'time_created', 'time_changed', 'is_active']

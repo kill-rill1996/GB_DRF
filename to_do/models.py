@@ -20,7 +20,7 @@ class Project(models.Model):
 
 class ToDo(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid4)
-    project = models.ForeignKey("Project", on_delete=models.CASCADE, related_name='to_do')
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='to_do')
     text = models.TextField(max_length=1024)
     time_created = models.DateTimeField(auto_now_add=True)
     time_changed = models.DateTimeField(auto_now=True)
@@ -28,7 +28,7 @@ class ToDo(models.Model):
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return f'Project {self.project}, user: {self.user}'
+        return f'Todo for {self.project}, user: {self.user.first_name}'
 
     class Meta:
         verbose_name = 'Заметка'

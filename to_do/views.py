@@ -14,7 +14,7 @@ class ProjectModelViewSet(ModelViewSet):
     queryset = Project.objects.all()
     logger.info(f'Сработала вьюха {__name__}')
     serializer_class = ProjectsModelSerializer
-    pagination_class = ProjectPageNumberPagination
+    # pagination_class = ProjectPageNumberPagination
 
     # Фильтрация через get_queryset
     def get_queryset(self):
@@ -31,7 +31,7 @@ class TodoModelViewSet(ModelViewSet):
     serializer_class = ToDoModelSerializer
     filterset_class = TodoFilter
     # filterset_fields = ['text', 'project']
-    pagination_class = TodoPagination
+    # pagination_class = TodoPagination
 
     def destroy(self, request, *args, **kwargs):
         to_do = get_object_or_404(ToDo, pk=kwargs['pk'])
