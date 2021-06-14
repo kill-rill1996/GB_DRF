@@ -73,11 +73,14 @@ INSTALLED_APPS = [
     'django_filters',
     'corsheaders',
 
+    'graphene_django',  # GraphQl
+
+    'drf_yasg',
+
     'library',
     'users',
     'to_do',
-
-    #app for add data in DB
+    #app for adding data in DB
     'data',
 ]
 
@@ -176,6 +179,7 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
     ],
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
@@ -192,3 +196,7 @@ REST_FRAMEWORK = {
 
 
 AUTH_USER_MODEL = 'users.User'
+
+GRAPHENE = {
+    "SCHEMA": "service.schema.schema"
+}

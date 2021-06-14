@@ -17,23 +17,16 @@ def parse_path(request: object) -> str:
 
 def get_number_of_items(request: object) -> int:
     """Get number of models to create"""
-    return int(request.headers['Number'])
+    try:
+        return int(request.headers['Number'])
+    except KeyError:
+        return 1
 
 
 def get_key_from_value(dict, value):
     for key, v in dict.items():
         if v == value:
             return key
-
-
-def add_books(request: object) -> None:
-    """
-    Add count of authors in GET headers 'Number' to create them in DB
-    :param count: count of authors to create
-    :return: None
-    """
-    count = get_number_of_items(request)
-    mixer.cycle(count).blend(Book, author=mixer.select)
 
 
 def add_items(request: object) -> str:

@@ -1,9 +1,4 @@
-import json
-
 from django.shortcuts import redirect
-from mixer.backend.django import mixer
-from library.models import Book, Author
-
 from .services.add_items import add_items
 
 
